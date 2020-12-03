@@ -1,0 +1,10 @@
+<ng-template #menuButtonTemplate>
+  <ng-content select="[MenuButton]"></ng-content>
+</ng-template>
+
+<ng-template #menuItemsTemplate>
+  <ng-content select="[MenuItems]" style="opacity: 0;"></ng-content>
+</ng-template>
+
+<ng-container #menuButtonContainer></ng-container>
+<ng-container #menuItemsContainer [ngTemplateOutlet]="opened ? menuItemsTemplate : null"></ng-container>
