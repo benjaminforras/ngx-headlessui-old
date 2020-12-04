@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 import { Reason, transition } from './utils/transitions';
 
 @Component({
@@ -29,6 +29,18 @@ export class TransitionComponent implements OnInit, OnChanges {
   @Input()
   leaveTo: string = '';
 
+  @Output()
+  beforeEnter = new EventEmitter();
+
+  @Output()
+  afterEnter = new EventEmitter();
+
+  @Output()
+  beforeLeave = new EventEmitter();
+
+  @Output()
+  afterLeave = new EventEmitter();
+
   closed!: boolean;
   private elementRef!: HTMLElement;
 
@@ -43,12 +55,14 @@ export class TransitionComponent implements OnInit, OnChanges {
         setTimeout(() => {
           this.elementRef = this.transitionContainer.get(0).rootNodes[0];
         });
+        this.beforeEnter.emit();
         this.transitionEnter(this.elementRef);
       } else {
         if (!this.transitionContainer) {
           return;
         }
         this.elementRef = this.transitionContainer.get(0).rootNodes[0];
+        this.beforeLeave.emit();
         this.transitionLeave(this.elementRef);
       }
     }
@@ -59,11 +73,13 @@ export class TransitionComponent implements OnInit, OnChanges {
 
   transitionEnter(elementRef: HTMLElement): void {
     transition(elementRef, this.useSplitClasses(this.enter), this.useSplitClasses(this.enterFrom), this.useSplitClasses(this.enterTo), (reason: Reason) => {
+      this.afterEnter.emit();
     });
   }
 
   transitionLeave(elementRef: HTMLElement): void {
     transition(elementRef, this.useSplitClasses(this.leave), this.useSplitClasses(this.leaveFrom), this.useSplitClasses(this.leaveTo), (reason: Reason) => {
+      this.afterLeave.emit();
       this.closed = true;
     });
   }
