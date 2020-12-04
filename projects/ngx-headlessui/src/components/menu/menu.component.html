@@ -2,11 +2,7 @@
   <ng-content select="[MenuButton]"></ng-content>
 </ng-template>
 
-<ng-template #menuItemsTemplate>
-  <ng-content select="[MenuItems]" style="opacity: 0;"></ng-content>
-</ng-template>
-
 <ng-container #menuButtonContainer></ng-container>
-<ngx-transition [show]="opened" [enter]="'transition ease-out duration-100'" [enterFrom]="'transform opacity-0 scale-95'" [enterTo]="'transform opacity-100 scale-100'" [leave]="'transition ease-in duration-75'" [leaveFrom]="'transform opacity-100 scale-100'" [leaveTo]="'transform opacity-0 scale-95'">
-  <ng-container #menuItemsContainer [ngTemplateOutlet]="menuItemsTemplate"></ng-container>
-</ngx-transition>
+<ng-container *ngIf="opened">
+  <ng-content select="[MenuItems]"></ng-content>
+</ng-container>
