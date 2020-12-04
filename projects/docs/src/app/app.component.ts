@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'docs';
+
+  mobileMenuOpened: boolean = false;
+  componentsOpened: boolean = false;
 }

@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu.component';
 import { NgModule } from '@angular/core';
+import { TransitionModule } from './../transition/transition.module';
 
 @NgModule({
   declarations: [MenuComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    TransitionModule
   ],
   exports: [MenuComponent]
 })

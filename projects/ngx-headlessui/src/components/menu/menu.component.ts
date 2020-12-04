@@ -5,9 +5,16 @@ import { fromEvent } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'NgxMenu',
+  selector: 'ngx-menu',
   templateUrl: './menu.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  styles: [
+    `
+    :host {
+      all: unset;
+    }
+    `
+  ]
 })
 export class MenuComponent implements AfterViewInit {
   @Input()

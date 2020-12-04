@@ -1,4 +1,40 @@
+@import url("https://rsms.me/inter/inter.css");
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 /* You can add global styles to this file, and also import other style files */
+
+@layer components {
+  .container {
+    @apply max-w-7xl sm:px-6 lg:px-8 mx-auto;
+  }
+
+  .btn {
+    @apply focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-offset-2 relative inline-flex items-center px-4 py-2 text-sm font-medium leading-5 transition duration-150 ease-in-out bg-white border rounded-md cursor-pointer;
+  }
+
+  .btn.disabled {
+    @apply opacity-50 cursor-not-allowed pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply focus:ring-indigo-400 hover:bg-indigo-500 focus:border-indigo-700 text-white bg-indigo-600 border-transparent;
+  }
+
+  .btn-primary-outline {
+    @apply focus:ring-indigo-400 hover:bg-indigo-500 focus:border-indigo-700 hover:text-white text-indigo-500 bg-white border-indigo-500;
+  }
+
+  .btn-primary-shadow {
+    @apply focus:ring-indigo-400 hover:bg-indigo-100 hover:text-indigo-700 bg-indigo-50 text-indigo-500;
+  }
+
+  .btn-plain {
+    @apply focus:ring-gray-400 hover:text-gray-500 hover:border-gray-500 focus:text-gray-500 focus:border-gray-500 text-gray-700 bg-white border-gray-300;
+  }
+
+  .btn-danger {
+    @apply focus:ring-red-400 hover:bg-red-500 focus:bg-red-500 text-white bg-red-600;
+  }
+}

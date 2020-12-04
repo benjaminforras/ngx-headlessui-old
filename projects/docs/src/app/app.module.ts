@@ -1,17 +1,27 @@
+import { MenuModule, TransitionModule } from 'ngx-headlessui';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { MenuModule } from 'ngx-headlessui';
 import { NgModule } from '@angular/core';
+import { NgxMenuPageComponent } from './pages/ngx-menu-page/ngx-menu-page.component';
+import { PreviewComponent } from './components/preview/preview.component';
+import { NgxTransitionPageComponent } from './pages/ngx-transition-page/ngx-transition-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PreviewComponent,
+    NgxMenuPageComponent,
+    NgxTransitionPageComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    MenuModule
+    MenuModule,
+    TransitionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

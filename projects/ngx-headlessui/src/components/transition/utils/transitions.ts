@@ -1,5 +1,5 @@
-import { disposables } from 'projects/ngx-headlessui/src/utils/disposables';
-import { once } from 'projects/ngx-headlessui/src/utils/once';
+import { disposables } from '../../../utils/disposables';
+import { once } from '../../../utils/once';
 
 function addClasses(node: HTMLElement, ...classes: string[]) {
   node && classes.length > 0 && node.classList.add(...classes);
