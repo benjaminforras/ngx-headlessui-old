@@ -2,7 +2,9 @@
   <ng-content select="[MenuButton]"></ng-content>
 </ng-template>
 
-<ng-container #menuButtonContainer></ng-container>
-<ng-container *ngIf="opened">
+<ng-template #menuItemsTemplate>
   <ng-content select="[MenuItems]"></ng-content>
-</ng-container>
+</ng-template>
+
+<ng-container #menuButtonContainer></ng-container>
+<ng-container #menuItemsContainer [ngTemplateOutlet]="!closed ? menuItemsTemplate : null"></ng-container>

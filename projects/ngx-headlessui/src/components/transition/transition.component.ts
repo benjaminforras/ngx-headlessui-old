@@ -1,20 +1,36 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { Reason, transition } from './utils/transitions';
 
 @Component({
   selector: 'ngx-transition',
   templateUrl: './transition.component.html',
-  styles: [
-  ]
+  styles: [],
 })
-export class TransitionComponent implements OnInit, OnChanges {
+export class TransitionComponent implements OnChanges, AfterContentInit {
 
-  @ViewChild('transitionContainer', { read: ViewContainerRef })
+  @ViewChild('transitionContainer', {read: ViewContainerRef})
   transitionContainer!: ViewContainerRef | any;
 
+  /**
+   * Whether to show or not the contents of ngx-transition
+   */
   @Input()
   show: boolean = false;
 
+  /**
+   * Classes to be applied on the element when showing
+   */
   @Input()
   enter: string = '';
   @Input()
@@ -22,6 +38,9 @@ export class TransitionComponent implements OnInit, OnChanges {
   @Input()
   enterTo: string = '';
 
+  /**
+   * Classes to be applied on the element when leaving
+   */
   @Input()
   leave: string = '';
   @Input()
@@ -30,31 +49,48 @@ export class TransitionComponent implements OnInit, OnChanges {
   leaveTo: string = '';
 
   @Output()
-  beforeEnter = new EventEmitter();
+  beforeEnter: EventEmitter<any> = new EventEmitter();
 
   @Output()
-  afterEnter = new EventEmitter();
+  afterEnter: EventEmitter<any> = new EventEmitter();
 
   @Output()
-  beforeLeave = new EventEmitter();
+  beforeLeave: EventEmitter<any> = new EventEmitter();
 
   @Output()
-  afterLeave = new EventEmitter();
+  afterLeave: EventEmitter<any> = new EventEmitter();
 
-  closed!: boolean;
+  init: boolean = true;
+  closed: boolean = true;
   private elementRef!: HTMLElement;
 
   constructor() {
     this.closed = !this.show;
   }
 
+  @HostBinding('style.visibility')
+  get getVisibility(): string {
+    return this.init ? 'hidden' : 'visible';
+  }
+
+  ngAfterContentInit(): void {
+    if (this.closed) {
+      this.closed = false;
+      setTimeout(() => {
+        this.elementRef = this.transitionContainer.get(0).rootNodes[0];
+
+        setTimeout(() => {
+          this.closed = true;
+          this.init = false;
+        });
+      });
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.show) {
       if (this.show) {
         this.closed = false;
-        setTimeout(() => {
-          this.elementRef = this.transitionContainer.get(0).rootNodes[0];
-        });
         this.beforeEnter.emit();
         this.transitionEnter(this.elementRef);
       } else {
@@ -68,27 +104,20 @@ export class TransitionComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit(): void {
-  }
-
-  transitionEnter(elementRef: HTMLElement): void {
+  private transitionEnter(elementRef: HTMLElement): void {
     transition(elementRef, this.useSplitClasses(this.enter), this.useSplitClasses(this.enterFrom), this.useSplitClasses(this.enterTo), (reason: Reason) => {
       this.afterEnter.emit();
     });
   }
 
-  transitionLeave(elementRef: HTMLElement): void {
+  private transitionLeave(elementRef: HTMLElement): void {
     transition(elementRef, this.useSplitClasses(this.leave), this.useSplitClasses(this.leaveFrom), this.useSplitClasses(this.leaveTo), (reason: Reason) => {
       this.afterLeave.emit();
       this.closed = true;
     });
   }
 
-  log(msg: any): void {
-    console.log(`[${Date.now()}] ${msg}`);
-  }
-
-  useSplitClasses(classes: string = ''): string[] {
+  private useSplitClasses(classes: string = ''): string[] {
     return classes.split(' ').filter(className => className.trim().length > 1);
   }
 }

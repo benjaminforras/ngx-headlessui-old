@@ -11,7 +11,7 @@
     <div class="md:mt-0 md:col-span-2 mt-5 space-y-2">
       <div>
         <app-preview [code]="simpleMenuSnippet" title="Simple ngx-menu with no styling">
-          <div preview class="flex justify-center w-full p-8" style="overflow: auto; min-height: 380px;">
+          <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px;">
             <ngx-menu>
               <button MenuButton type="button">
                 Menu
@@ -30,34 +30,73 @@
 
       <div>
         <app-preview [code]="tailwindMenuSnippet" title="Simple ngx-menu styled with TailwindCSS">
-          <div preview class="flex justify-center w-full p-8" style="overflow: auto; min-height: 380px;">
+          <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px;">
             <ngx-menu class="relative inline-block text-left">
               <div MenuButton>
-                <button type="button" class="hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm" id="options-menu" aria-haspopup="true" aria-expanded="true">
+                <button aria-expanded="true" aria-haspopup="true" class="hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm" id="options-menu" type="button">
                   Options
-                  <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" fill-rule="evenodd"/>
                   </svg>
                 </button>
               </div>
 
-              <div MenuItems class="ring-1 ring-black ring-opacity-5 absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+              <div MenuItems aria-labelledby="options-menu" aria-orientation="vertical" class="ring-1 ring-black ring-opacity-5 absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg" role="menu">
                 <div class="py-1">
-                  <a href="#" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Edit</a>
-                  <a href="#" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Duplicate</a>
+                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Edit</a>
+                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Duplicate</a>
                 </div>
                 <div class="py-1">
-                  <a href="#" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Archive</a>
-                  <a href="#" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Move</a>
+                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Archive</a>
+                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Move</a>
                 </div>
                 <div class="py-1">
-                  <a href="#" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Share</a>
-                  <a href="#" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Add to favorites</a>
+                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Share</a>
+                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Add
+                    to favorites</a>
                 </div>
                 <div class="py-1">
-                  <a disabled href="#" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700 opacity-50 cursor-not-allowed" role="menuitem">Delete</a>
+                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700 opacity-50 cursor-not-allowed" disabled role="menuitem">Delete</a>
                 </div>
               </div>
+            </ngx-menu>
+          </div>
+        </app-preview>
+      </div>
+
+      <div>
+        <app-preview [code]="transitionMenuSnippet" title="Simple ngx-menu styled with ngx-transition">
+          <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px;">
+            <ngx-menu #menu class="relative inline-block text-left">
+              <div MenuButton>
+                <button aria-expanded="true" aria-haspopup="true" class="hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm" id="options-menu" type="button">
+                  Options
+                  <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" fill-rule="evenodd"/>
+                  </svg>
+                </button>
+              </div>
+
+              <ngx-transition MenuItems [enterFrom]="'transform opacity-0 scale-95'" [enterTo]="'transform opacity-100 scale-100'" [enter]="'transition ease-out duration-100'" [leaveFrom]="'transform opacity-100 scale-100'" [leaveTo]="'transform opacity-0 scale-95'" [leave]="'transition ease-in duration-75'" [show]="menu.opened">
+                <div aria-labelledby="options-menu" aria-orientation="vertical" class="ring-1 ring-black ring-opacity-5 absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg" role="menu">
+                  <div class="py-1">
+                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Edit</a>
+                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Duplicate</a>
+                  </div>
+                  <div class="py-1">
+                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Archive</a>
+                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Move</a>
+                  </div>
+                  <div class="py-1">
+                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Share</a>
+                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Add
+                      to favorites</a>
+                  </div>
+                  <div class="py-1">
+                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700 opacity-50 cursor-not-allowed" disabled role="menuitem">Delete</a>
+                  </div>
+                </div>
+              </ngx-transition>
             </ngx-menu>
           </div>
         </app-preview>
@@ -73,16 +112,7 @@
         </div>
 
         <div class="divide-y divide-gray-200">
-
-          <div class="md:grid-cols-3 grid grid-cols-1 px-6 py-4">
-            <span class="text-sm font-medium text-gray-500">Disable animations</span>
-            <pre class="sm:prose-sm w-auto prose"><code>disableAnimations</code></pre>
-            <div class="md:items-start flex items-center space-x-4">
-              <span class="text-sm font-medium text-gray-500">Default value:</span>
-              <pre class="sm:prose-sm w-auto prose"><code>false</code></pre>
-            </div>
-          </div>
-
+          
           <div class="md:grid-cols-3 grid grid-cols-1 px-6 py-4">
             <span class="text-sm font-medium text-gray-500">Close Menu when clicked on Item</span>
             <pre class="sm:prose-sm w-auto prose"><code>closeOnItemClick</code></pre>
