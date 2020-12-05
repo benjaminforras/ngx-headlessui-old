@@ -1,10 +1,11 @@
 {
   "name": "ngx-headlessui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --project=docs",
+    "build": "ng build --prod --project=docs",
+    "build:lib": "ng build --prod --project=ngx-headlessui",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
