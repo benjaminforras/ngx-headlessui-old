@@ -12,6 +12,11 @@ const routes: Routes = [
   {
     path: 'transition',
     component: NgxTransitionPageComponent
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: '/menu'
   }
 ];
 

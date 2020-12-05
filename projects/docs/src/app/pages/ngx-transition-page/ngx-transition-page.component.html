@@ -63,11 +63,20 @@
         <!-- Api -->
         <div class="sm:py-4 sm:px-6 sm:items-baseline flex items-center justify-between px-4 py-2 bg-white border-b border-gray-200">
           <div class="flex items-center flex-shrink min-w-0">
-            <h3 class="font-regular md:text-lg flex-shrink min-w-0 text-base leading-snug truncate"> ngx-menu properties </h3>
+            <h3 class="font-regular md:text-lg flex-shrink min-w-0 text-base leading-snug truncate"> ngx-transition properties </h3>
           </div>
         </div>
 
         <div class="divide-y divide-gray-200">
+
+          <div class="md:grid-cols-3 grid grid-cols-1 px-6 py-4">
+            <span class="text-sm font-medium text-gray-500">Wrap the content that should be conditionally rendered in a <code>ngx-transition</code> component, and use the <code>show</code> prop to control whether the content should be visible or hidden.</span>
+            <pre class="sm:prose-sm w-auto prose"><code>show</code></pre>
+            <div class="md:items-start flex items-center space-x-4">
+              <span class="text-sm font-medium text-gray-500">Default value:</span>
+              <pre class="sm:prose-sm w-auto prose"><code>false</code></pre>
+            </div>
+          </div>
 
           <div class="md:grid-cols-3 grid grid-cols-1 px-6 py-4">
             <span class="text-sm font-medium text-gray-500">Applied the entire time an element is entering. Usually you define your duration and what properties you want to transition here, for example <code>transition-opacity duration-75</code>.</span>
