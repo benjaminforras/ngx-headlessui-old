@@ -1,8 +1,9 @@
-import { RouterModule, Routes } from '@angular/router';
-
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { IndexComponent } from './pages/index/index.component';
 import { NgxMenuPageComponent } from './pages/ngx-menu-page/ngx-menu-page.component';
 import { NgxTransitionPageComponent } from './pages/ngx-transition-page/ngx-transition-page.component';
+
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'transition',
     component: NgxTransitionPageComponent
+  },
+  {
+    path: 'landing',
+    component: IndexComponent
   },
   {
     path: '**',

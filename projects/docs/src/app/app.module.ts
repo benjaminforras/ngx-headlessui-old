@@ -8,13 +8,15 @@ import { NgxMenuPageComponent } from './pages/ngx-menu-page/ngx-menu-page.compon
 import { NgxTransitionPageComponent } from './pages/ngx-transition-page/ngx-transition-page.component';
 import { PreviewComponent } from './components/preview/preview.component';
 import { TransitionModule } from 'projects/ngx-headlessui/src/components/transition/transition.module';
+import { IndexComponent } from './pages/index/index.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PreviewComponent,
     NgxMenuPageComponent,
-    NgxTransitionPageComponent
+    NgxTransitionPageComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
