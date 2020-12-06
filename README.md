@@ -1,27 +1,35 @@
-# NgxHeadlessui
+# ngx-headlessui
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.3.
+![](https://img.shields.io/npm/v/ngx-headlessui) ![](https://img.shields.io/npm/dt/ngx-headlessui)
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+_Completely unstyled UI components, designed to integrate beautifully with Tailwind CSS._
 
-## Code scaffolding
+_Based on the idea of [tailwindlabs/headlessui](https://github.com/tailwindlabs/headlessui)_ (**_Not all components will be migrated to this library_**)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Components
+_This project is still in early development_
 
-## Build
+- ngx-transition
+- ngx-menu
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+---
 
-## Running unit tests
+## ngx-transition
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[View live demo](https://ngx-headlessui.tryharddood.vercel.app/transition)
 
-## Running end-to-end tests
+The `ngx-transition` component lets you add enter/leave transitions to conditionally rendered elements, using CSS classes to control the actual transition styles in the different stages of the transition.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- [Basic example](https://ngx-headlessui.tryharddood.vercel.app/transition)
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## ngx-menu
+
+[View live demo](https://ngx-headlessui.tryharddood.vercel.app/menu)
+
+The `ngx-menu` component and related child components are used to quickly build custom dropdown components.
+
+- [Basic example](https://ngx-headlessui.tryharddood.vercel.app/menu)
+

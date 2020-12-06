@@ -1,24 +1,35 @@
-# NgxHeadlessui
+# ngx-headlessui
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.3.
+![](https://img.shields.io/npm/v/ngx-headlessui) ![](https://img.shields.io/npm/dt/ngx-headlessui)
 
-## Code scaffolding
 
-Run `ng generate component component-name --project ngx-headlessui` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-headlessui`.
-> Note: Don't forget to add `--project ngx-headlessui` or else it will be added to the default project in your `angular.json` file. 
+_Completely unstyled UI components, designed to integrate beautifully with Tailwind CSS._
 
-## Build
+_Based on the idea of [tailwindlabs/headlessui](https://github.com/tailwindlabs/headlessui)_ (**_Not all components will be migrated to this library_**)
 
-Run `ng build ngx-headlessui` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Components
+_This project is still in early development_
 
-## Publishing
+- ngx-transition
+- ngx-menu
 
-After building your library with `ng build ngx-headlessui`, go to the dist folder `cd dist/ngx-headlessui` and run `npm publish`.
+---
 
-## Running unit tests
+## ngx-transition
 
-Run `ng test ngx-headlessui` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[View live demo](https://ngx-headlessui.tryharddood.vercel.app/transition)
 
-## Further help
+The `ngx-transition` component lets you add enter/leave transitions to conditionally rendered elements, using CSS classes to control the actual transition styles in the different stages of the transition.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- [Basic example](https://ngx-headlessui.tryharddood.vercel.app/transition)
+
+---
+
+## ngx-menu
+
+[View live demo](https://ngx-headlessui.tryharddood.vercel.app/menu)
+
+The `ngx-menu` component and related child components are used to quickly build custom dropdown components.
+
+- [Basic example](https://ngx-headlessui.tryharddood.vercel.app/menu)
+
