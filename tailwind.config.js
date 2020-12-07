@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = (isProd) => ({
   prefix: '',
   important: true,
@@ -7,7 +9,11 @@ module.exports = (isProd) => ({
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        fuchsia: colors.fuchsia
+      }
+    },
   },
   variants: {
     opacity: ["hover", "focus", "disabled"],
