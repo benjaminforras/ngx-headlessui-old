@@ -68,12 +68,16 @@
               "projects/docs/src/assets"
             ],
             "styles": [
-              "projects/docs/src/styles.scss"
+              "projects/docs/src/styles.scss",
+              "node_modules/highlight.js/styles/vs2015.css"
             ],
             "scripts": [],
             "customWebpackConfig": {
               "path": "webpack.config.js"
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "highlight.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -134,7 +138,8 @@
               "projects/docs/src/assets"
             ],
             "styles": [
-              "projects/docs/src/styles.scss"
+              "projects/docs/src/styles.scss",
+              "node_modules/highlight.js/styles/vs2015.css"
             ],
             "scripts": [],
             "customWebpackConfig": {

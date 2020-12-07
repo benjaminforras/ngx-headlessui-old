@@ -43,7 +43,7 @@
   <div class="relative bg-gray-300" [ngClass]="{'block': activeTab === 'code', 'hidden': activeTab !== 'code' }">
     <div class="relative" style="max-width: 100%; width: 100%">
       <div class="max-w-none prose">
-        <pre class="rounded-t-none"><code>{{code}}</code></pre>
+        <pre class="rounded-t-none"><code [highlight]="code" [languages]="['html']"></code></pre>
       </div>
     </div>
   </div>
