@@ -32,7 +32,6 @@ export class NgxTransitionPageComponent implements OnInit {
         <a disabled href="#" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700 opacity-50 cursor-not-allowed" role="menuitem">Delete</a>
       </div>
     </div>
-
   </ngx-transition>
 </div>
 `;
