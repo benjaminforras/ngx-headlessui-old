@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,9 +6,15 @@ import { Injectable } from '@angular/core';
 })
 export class CopyService {
 
+  copied: BehaviorSubject<any> = new BehaviorSubject(false);
+
   constructor() { }
 
   copy(code: string): void {
+    if (this.copied.value) {
+      return;
+    }
+
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
@@ -19,5 +26,10 @@ export class CopyService {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+
+    this.copied.next(true);
+    setTimeout(() => {
+      this.copied.next(false);
+    }, 3000);
   }
 }

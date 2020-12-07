@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { IndexComponent } from './pages/index/index.component';
+import { NgModule } from '@angular/core';
 import { NgxMenuPageComponent } from './pages/ngx-menu-page/ngx-menu-page.component';
 import { NgxTransitionPageComponent } from './pages/ngx-transition-page/ngx-transition-page.component';
-
 
 const routes: Routes = [
   {
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

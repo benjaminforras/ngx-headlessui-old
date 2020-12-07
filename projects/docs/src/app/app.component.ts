@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CopyService } from './services/copy.service';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -13,4 +14,16 @@ export class AppComponent {
 
   mobileMenuOpened: boolean = false;
   componentsOpened: boolean = false;
+
+  copied: any;
+
+  constructor(private copyService: CopyService) {
+    this.copyService.copied.subscribe((value) => {
+      this.copied = value;
+    });
+  }
+
+  close(): void {
+    this.copyService.copied.next(false);
+  }
 }
