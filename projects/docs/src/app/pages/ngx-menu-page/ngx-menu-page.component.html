@@ -36,7 +36,7 @@
                 <button aria-expanded="true" aria-haspopup="true" class="hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm" id="options-menu" type="button">
                   Options
                   <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" fill-rule="evenodd"/>
+                    <path clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" fill-rule="evenodd" />
                   </svg>
                 </button>
               </div>
@@ -72,7 +72,7 @@
                 <button aria-expanded="true" aria-haspopup="true" class="hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm" id="options-menu" type="button">
                   Options
                   <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" fill-rule="evenodd"/>
+                    <path clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" fill-rule="evenodd" />
                   </svg>
                 </button>
               </div>
@@ -102,9 +102,8 @@
         </app-preview>
       </div>
 
-      <div class="sm:rounded-md bg-white shadow">
+      <div class="sm:rounded-md bg-white shadow" *ngIf="componentProperties && componentProperties.length > 0">
 
-        <!-- Api -->
         <div class="sm:py-4 sm:px-6 sm:items-baseline flex items-center justify-between px-4 py-2 bg-white border-b border-gray-200">
           <div class="flex items-center flex-shrink min-w-0">
             <h3 class="font-regular md:text-lg flex-shrink min-w-0 text-base leading-snug truncate"> ngx-menu properties </h3>
@@ -112,28 +111,17 @@
         </div>
 
         <div class="divide-y divide-gray-200">
-
-          <div class="md:grid-cols-3 grid grid-cols-1 px-6 py-4">
-            <span class="text-sm font-medium text-gray-500">Close Menu when clicked on Item</span>
-            <pre class="sm:prose-sm w-auto prose"><code>closeOnItemClick</code></pre>
+          <div [ngClass]="{'md:grid-cols-3': property.default, 'md:grid-cols-2': !property.default}" class="grid grid-cols-1 px-6 py-4" *ngFor="let property of componentProperties">
+            <span class="text-sm font-medium text-gray-500" [innerHTML]="property.description"></span>
+            <pre class="sm:prose-sm w-auto prose"><code>{{property.name}}</code></pre>
             <div class="md:items-start flex items-center space-x-4">
               <span class="text-sm font-medium text-gray-500">Default value:</span>
-              <pre class="sm:prose-sm w-auto prose"><code>true</code></pre>
-            </div>
-          </div>
-
-          <div class="md:grid-cols-3 grid grid-cols-1 px-6 py-4">
-            <span class="text-sm font-medium text-gray-500">Close Menu when clicked outside of Menu</span>
-            <pre class="sm:prose-sm w-auto prose"><code>closeOnClickOutside</code></pre>
-            <div class="md:items-start flex items-center space-x-4">
-              <span class="text-sm font-medium text-gray-500">Default value:</span>
-              <pre class="sm:prose-sm w-auto prose"><code>true</code></pre>
+              <pre class="sm:prose-sm w-auto prose"><code>{{property.default}}</code></pre>
             </div>
           </div>
         </div>
-        <!-- ./Api -->
-
       </div>
+
     </div>
   </div>
 </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ComponentProperty } from './../../interface/component-property';
+
 @Component({
   templateUrl: './ngx-menu-page.component.html',
   styles: []
@@ -84,6 +86,19 @@ export class NgxMenuPageComponent implements OnInit {
     </div>
   </ngx-transition>
 </ngx-menu>`;
+
+  componentProperties: ComponentProperty[] = [
+    {
+      name: 'closeOnItemClick',
+      description: `Close Menu when clicked on Item`,
+      default: 'true'
+    },
+    {
+      name: 'closeOnClickOutside',
+      description: `Close Menu when clicked outside of Menu`,
+      default: 'true'
+    },
+  ];
 
   constructor() {
   }

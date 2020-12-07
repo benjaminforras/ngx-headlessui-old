@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ComponentProperty } from './../../interface/component-property';
+
 @Component({
   templateUrl: './ngx-transition-page.component.html',
   styles: [
@@ -35,6 +37,63 @@ export class NgxTransitionPageComponent implements OnInit {
   </ngx-transition>
 </div>
 `;
+
+  componentProperties: ComponentProperty[] = [
+    {
+      name: 'show',
+      description: `Wrap the content that should be conditionally rendered in a <code>ngx-transition</code> component, and use the <code>show</code> prop to control whether the content should be visible or hidden.`,
+      default: 'false'
+    },
+    {
+      name: 'enter',
+      description: `Applied the entire time an element is entering. Usually you define your duration and what properties you want to transition here, for example <code>transition-opacity duration-75</code>.`,
+      default: 'none'
+    },
+    {
+      name: 'enterFrom',
+      description: `The starting point to enter from, for example <code>opacity-0</code> if something should fade in.`,
+      default: 'none'
+    },
+    {
+      name: 'enterTo',
+      description: `The ending point to enter to, for example <code>opacity-100</code> after fading in.`,
+      default: 'none'
+    },
+    {
+      name: 'leave',
+      description: `Applied the entire time an element is leaving. Usually you define your duration and what properties you want to transition here, for example <code>transition-opacity duration-75</code>.`,
+      default: 'none'
+    },
+    {
+      name: 'leaveFrom',
+      description: `The starting point to leave from, for example <code>opacity-100</code> if something should fade out.`,
+      default: 'none'
+    },
+    {
+      name: 'leaveTo',
+      description: `The ending point to leave to, for example <code>opacity-0</code> after fading out.`,
+      default: 'none'
+    },
+  ];
+
+  componentPropertiesEvents: ComponentProperty[] = [
+    {
+      name: 'beforeEnter',
+      description: `Fired right before the transition starts entering.`,
+    },
+    {
+      name: 'afterEnter',
+      description: `Fired when the transition finished entering.`,
+    },
+    {
+      name: 'beforeLeave',
+      description: `Fired right before the transition starts leaving.`,
+    },
+    {
+      name: 'afterLeave',
+      description: `Fired when the transition finished leaving.`,
+    },
+  ];
 
   condition: boolean = false;
 
