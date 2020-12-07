@@ -5,24 +5,49 @@
       Rapidly build custom components to fit your likings.
     </h1>
     <p class="sm:text-2xl sm:leading-10 sm:mb-11 max-w-screen-lg mb-10 text-lg font-medium">
-      Completely unstyled UI components, designed to integrate beautifully with Tailwind CSS.
+      Completely unstyled UI components, designed to integrate beautifully with
+      Tailwind CSS.
     </p>
-    <div class="sm:space-y-0 sm:space-x-4 flex flex-wrap space-y-4 text-center">
-      <a class="btn sm:w-auto sm:justify-start rounded-xl hover:text-gray-50 ring-black ring-offset-white justify-center w-full px-6 py-3 text-lg text-white bg-gray-900" href="/docs">Get started</a>
-      <button type="button" class="sm:w-auto bg-gray-50 hover:text-gray-900 sm:px-6 rounded-xl sm:space-x-4 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-300 focus:outline-none flex items-center justify-center flex-none w-full py-3 space-x-2 font-mono leading-6 text-gray-400 transition-colors duration-200 border border-gray-200">
-        <span class="text-gray-900">
-          <span class="sm:inline hidden text-gray-500" aria-hidden="true">$ </span> npm install ngx-headlessui
-        </span>
-        <span class="sr-only">(click to copy to clipboard)</span>
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M8 16c0 1.886 0 2.828.586 3.414C9.172 20 10.114 20 12 20h4c1.886 0 2.828 0 3.414-.586C20 18.828 20 17.886 20 16v-4c0-1.886 0-2.828-.586-3.414C18.828 8 17.886 8 16 8m-8 8h4c1.886 0 2.828 0 3.414-.586C16 14.828 16 13.886 16 12V8m-8 8c-1.886 0-2.828 0-3.414-.586C4 14.828 4 13.886 4 12V8c0-1.886 0-2.828.586-3.414C5.172 4 6.114 4 8 4h4c1.886 0 2.828 0 3.414.586C16 5.172 16 6.114 16 8"></path>
-        </svg>
-      </button>
+    <div class="sm:justify-between sm:flex-row sm:space-y-0 flex flex-col space-y-4">
+      <div class="sm:space-y-0 sm:space-x-4 flex flex-wrap space-y-4 text-center">
+        <a class="btn sm:w-auto sm:justify-start rounded-xl hover:text-gray-50 ring-black ring-offset-white justify-center w-full px-6 py-3 text-lg text-white bg-gray-900" href="/docs">Get started</a>
+        <button (click)="copy('npm install ngx-headlessui')" type="button" class="sm:w-auto bg-gray-50 hover:text-gray-900 sm:px-6 rounded-xl sm:space-x-4 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-300 focus:outline-none flex items-center justify-center flex-none w-full py-3 space-x-2 font-mono leading-6 text-gray-400 transition duration-200 border border-gray-200">
+          <span class="text-gray-900">
+            <span class="sm:inline hidden text-gray-500" aria-hidden="true">$
+            </span>
+            npm install ngx-headlessui
+          </span>
+          <span class="sr-only">(click to copy to clipboard)</span>
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 16c0 1.886 0 2.828.586 3.414C9.172 20 10.114 20 12 20h4c1.886 0 2.828 0 3.414-.586C20 18.828 20 17.886 20 16v-4c0-1.886 0-2.828-.586-3.414C18.828 8 17.886 8 16 8m-8 8h4c1.886 0 2.828 0 3.414-.586C16 14.828 16 13.886 16 12V8m-8 8c-1.886 0-2.828 0-3.414-.586C4 14.828 4 13.886 4 12V8c0-1.886 0-2.828.586-3.414C5.172 4 6.114 4 8 4h4c1.886 0 2.828 0 3.414.586C16 5.172 16 6.114 16 8"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </section>
 
   <!-- Getting started section -->
   <section class="container py-6">
-
+    <h2 class="mt-16 mb-8 text-3xl font-extrabold tracking-tight text-gray-900">
+      Components
+    </h2>
+    <ul class="sm:grid-cols-3 xl:grid-cols-4 sm:gap-6 xl:gap-8 grid grid-cols-2 gap-4 font-semibold text-center text-gray-900">
+      <li class="flex">
+        <a routerLink="/menu" class="rounded-xl ring-1 ring-black ring-opacity-5 relative w-full p-6 shadow-sm">
+          <svg class="w-8 h-8 mx-auto mb-3 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          Menu
+        </a>
+      </li>
+      <li class="flex">
+        <a routerLink="/transition" class="rounded-xl ring-1 ring-black ring-opacity-5 relative w-full p-6 shadow-sm">
+          <svg class="w-8 h-8 mx-auto mb-3 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+          </svg>
+          Transition
+        </a>
+      </li>
+    </ul>
   </section>
 </div>

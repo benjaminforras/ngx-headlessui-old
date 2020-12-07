@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CopyService } from './../../services/copy.service';
+
 
 @Component({
   selector: 'app-preview',
@@ -16,23 +18,13 @@ export class PreviewComponent implements OnInit {
   @Input()
   title!: string;
 
-  constructor() { }
+  constructor(private copyService: CopyService) { }
 
   ngOnInit(): void {
 
   }
 
   copy(): void {
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = this.code;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
+    this.copyService.copy(this.code);
   }
 }

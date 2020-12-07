@@ -15,13 +15,13 @@ const routes: Routes = [
     component: NgxTransitionPageComponent
   },
   {
-    path: 'landing',
+    path: '',
     component: IndexComponent
   },
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: '/menu'
+    redirectTo: '/'
   }
 ];
 
