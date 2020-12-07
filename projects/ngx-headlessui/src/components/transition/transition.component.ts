@@ -74,6 +74,7 @@ export class TransitionComponent implements OnChanges, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
+    this.init = !this.show;
     if (this.closed) {
       this.closed = false;
       setTimeout(() => {
