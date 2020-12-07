@@ -11,8 +11,8 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import { fromEvent } from 'rxjs';
 import { TransitionComponent } from '../transition/transition.component';
+import { fromEvent } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -33,13 +33,13 @@ export class MenuComponent implements AfterViewInit {
 
   closed: boolean = true;
 
-  @ViewChild('menuButtonTemplate', {read: TemplateRef})
+  @ViewChild('menuButtonTemplate', { read: TemplateRef })
   menuButtonTemplate!: TemplateRef<any>;
 
-  @ViewChild('menuButtonContainer', {read: ViewContainerRef})
+  @ViewChild('menuButtonContainer', { read: ViewContainerRef })
   menuButtonContainer!: ViewContainerRef | any;
 
-  @ViewChild('menuItemsContainer', {read: ViewContainerRef})
+  @ViewChild('menuItemsContainer', { read: ViewContainerRef })
   menuItemsContainer!: ViewContainerRef | any;
 
   @Input()
@@ -47,6 +47,9 @@ export class MenuComponent implements AfterViewInit {
 
   @Input()
   closeOnClickOutside: boolean = true;
+
+  @Input()
+  closeOnDisabled: boolean = false;
 
   @ContentChild(TransitionComponent)
   transitionComponent!: TransitionComponent;
@@ -84,7 +87,7 @@ export class MenuComponent implements AfterViewInit {
     setTimeout(() => {
       const elementRef = this.menuItemsContainer.get(0).rootNodes[0];
       fromEvent(elementRef, 'click').pipe(take(1)).subscribe((event: any) => {
-        if (event.target && event.target.getAttribute('disabled') !== null) {
+        if (!this.closeOnDisabled && event.target && event.target.getAttribute('disabled') !== null) {
           return;
         }
 

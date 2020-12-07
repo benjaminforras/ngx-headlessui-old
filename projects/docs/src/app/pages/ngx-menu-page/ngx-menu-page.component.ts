@@ -98,6 +98,11 @@ export class NgxMenuPageComponent implements OnInit {
       description: `Close Menu when clicked outside of Menu`,
       default: 'true'
     },
+    {
+      name: 'closeOnDisabled',
+      description: `Close Menu when clicked on a disabled item`,
+      default: 'false'
+    },
   ];
 
   constructor() {
