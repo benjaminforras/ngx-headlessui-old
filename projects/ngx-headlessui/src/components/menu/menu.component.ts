@@ -16,7 +16,7 @@ import { fromEvent } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'ngx-menu',
+  selector: '[ngx-menu], ngx-menu',
   templateUrl: './menu.component.html',
   encapsulation: ViewEncapsulation.None,
   styles: [

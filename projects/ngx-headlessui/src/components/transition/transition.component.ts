@@ -13,7 +13,7 @@ import {
 import { Reason, transition } from './utils/transitions';
 
 @Component({
-  selector: 'ngx-transition',
+  selector: '[ngx-transition], ngx-transition',
   templateUrl: './transition.component.html',
   styles: [],
 })
