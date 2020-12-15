@@ -1,5 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
+import { ChangelogPageComponent } from './pages/changelog-page/changelog-page.component';
 import { IndexComponent } from './pages/index/index.component';
 import { NgModule } from '@angular/core';
 import { NgxMenuPageComponent } from './pages/ngx-menu-page/ngx-menu-page.component';
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'transition',
     component: NgxTransitionPageComponent
+  },
+  {
+    path: 'changelog',
+    component: ChangelogPageComponent
   },
   {
     path: '',

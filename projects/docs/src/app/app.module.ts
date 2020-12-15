@@ -12,6 +12,7 @@ import { NgxTransitionPageComponent } from './pages/ngx-transition-page/ngx-tran
 import { PreviewComponent } from './components/preview/preview.component';
 import { TestComponent } from './pages/test/test.component';
 import { TransitionModule } from 'projects/ngx-headlessui/src/components/transition/transition.module';
+import { ChangelogPageComponent } from './pages/changelog-page/changelog-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TransitionModule } from 'projects/ngx-headlessui/src/components/transit
     NgxMenuPageComponent,
     NgxTransitionPageComponent,
     IndexComponent,
-    TestComponent
+    TestComponent,
+    ChangelogPageComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ _Based on the idea of [tailwindlabs/headlessui](https://github.com/tailwindlabs/
 _This project is still in early development_
 
 - ngx-transition
-- ngx-menu
+- HeadlessMenu
 
 ---
 
@@ -25,11 +25,11 @@ The `ngx-transition` component lets you add enter/leave transitions to condition
 
 ---
 
-## ngx-menu
+## HeadlessMenu
 
 [View live demo](https://ngx-headlessui.tryharddood.vercel.app/menu)
 
-The `ngx-menu` component and related child components are used to quickly build custom dropdown components.
+The `HeadlessMenu` component and related child components are used to quickly build custom dropdown components.
 
 - [Basic example](https://ngx-headlessui.tryharddood.vercel.app/menu)
 
