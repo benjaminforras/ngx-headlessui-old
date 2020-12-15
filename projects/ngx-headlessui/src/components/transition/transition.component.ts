@@ -19,7 +19,7 @@ import { Reason, transition } from './utils/transitions';
 })
 export class TransitionComponent implements OnChanges, AfterContentInit {
 
-  @ViewChild('transitionContainer', {read: ViewContainerRef})
+  @ViewChild('transitionContainer', { read: ViewContainerRef })
   transitionContainer!: ViewContainerRef | any;
 
   /**

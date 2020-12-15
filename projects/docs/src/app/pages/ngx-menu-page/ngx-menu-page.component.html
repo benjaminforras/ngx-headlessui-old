@@ -12,18 +12,18 @@
       <div>
         <app-preview [code]="simpleMenuSnippet" title="Simple ngx-menu with no styling">
           <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px;">
-            <ngx-menu>
+            <div Menu>
               <button MenuButton type="button">
                 Menu
               </button>
 
-              <ul MenuItems>
-                <li>Item #1</li>
-                <li>Item #2</li>
-                <li>Item #3</li>
-                <li>Item #4</li>
+              <ul *MenuItems>
+                <li MenuItem>Item #1</li>
+                <li MenuItem>Item #2</li>
+                <li MenuItem>Item #3</li>
+                <li MenuItem>Item #4</li>
               </ul>
-            </ngx-menu>
+            </div>
           </div>
         </app-preview>
       </div>
@@ -31,7 +31,7 @@
       <div>
         <app-preview [code]="tailwindMenuSnippet" title="Simple ngx-menu styled with TailwindCSS">
           <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px;">
-            <ngx-menu class="relative inline-block text-left">
+            <div Menu class="relative inline-block text-left">
               <div MenuButton>
                 <button aria-expanded="true" aria-haspopup="true" class="hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm" id="options-menu" type="button">
                   Options
@@ -41,25 +41,25 @@
                 </button>
               </div>
 
-              <div MenuItems aria-labelledby="options-menu" aria-orientation="vertical" class="ring-1 ring-black ring-opacity-5 absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg" role="menu">
+              <div *MenuItems aria-labelledby="options-menu" aria-orientation="vertical" class="ring-1 ring-black ring-opacity-5 absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg" role="menu">
                 <div class="py-1">
-                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Edit</a>
-                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Duplicate</a>
+                  <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Edit</a>
+                  <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Duplicate</a>
                 </div>
                 <div class="py-1">
-                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Archive</a>
-                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Move</a>
+                  <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Archive</a>
+                  <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Move</a>
                 </div>
                 <div class="py-1">
-                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Share</a>
-                  <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Add
+                  <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Share</a>
+                  <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Add
                     to favorites</a>
                 </div>
                 <div class="py-1">
                   <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700 opacity-50 cursor-not-allowed" disabled role="menuitem">Delete</a>
                 </div>
               </div>
-            </ngx-menu>
+            </div>
           </div>
         </app-preview>
       </div>
@@ -67,7 +67,7 @@
       <div>
         <app-preview [code]="transitionMenuSnippet" title="ngx-menu with ngx-transition and TailwindCSS">
           <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px;">
-            <div ngx-menu #menu class="relative inline-block text-left">
+            <div Menu #menu class="relative inline-block text-left">
               <div MenuButton>
                 <button aria-expanded="true" aria-haspopup="true" class="hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm" id="options-menu" type="button">
                   Options
@@ -77,23 +77,25 @@
                 </button>
               </div>
 
-              <div ngx-transition MenuItems [enterFrom]="'transform opacity-0 scale-95'" [enterTo]="'transform opacity-100 scale-100'" [enter]="'transition ease-out duration-100'" [leaveFrom]="'transform opacity-100 scale-100'" [leaveTo]="'transform opacity-0 scale-95'" [leave]="'transition ease-in duration-75'" [show]="menu.opened">
+              <div ngx-transition [enterFrom]="'transform opacity-0 scale-95'" [enterTo]="'transform opacity-100 scale-100'" [enter]="'transition ease-out duration-100'" [leaveFrom]="'transform opacity-100 scale-100'" [leaveTo]="'transform opacity-0 scale-95'" [leave]="'transition ease-in duration-75'" [show]="menu.isOpened()">
                 <div aria-labelledby="options-menu" aria-orientation="vertical" class="ring-1 ring-black ring-opacity-5 absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg" role="menu">
-                  <div class="py-1">
-                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Edit</a>
-                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Duplicate</a>
-                  </div>
-                  <div class="py-1">
-                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Archive</a>
-                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Move</a>
-                  </div>
-                  <div class="py-1">
-                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Share</a>
-                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Add
-                      to favorites</a>
-                  </div>
-                  <div class="py-1">
-                    <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700 opacity-50 cursor-not-allowed" disabled role="menuitem">Delete</a>
+                  <div *MenuItems>
+                    <div class="py-1">
+                      <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Edit</a>
+                      <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Duplicate</a>
+                    </div>
+                    <div class="py-1">
+                      <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Archive</a>
+                      <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Move</a>
+                    </div>
+                    <div class="py-1">
+                      <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Share</a>
+                      <a MenuItem class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700" role="menuitem">Add
+                        to favorites</a>
+                    </div>
+                    <div class="py-1" disabled>
+                      <a class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700 opacity-50 cursor-not-allowed">Delete</a>
+                    </div>
                   </div>
                 </div>
               </div>
