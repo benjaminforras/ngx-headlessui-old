@@ -84,7 +84,7 @@ export class NgxMenuPageComponent implements OnInit {
   </div>
 </div>`;
 
-  componentProperties: ComponentProperty[] = [
+  componentProperties: ComponentProperty[] = [/*
     {
       name: 'closeOnItemClick',
       description: `Close Menu when clicked on Item`,
@@ -100,7 +100,7 @@ export class NgxMenuPageComponent implements OnInit {
       description: `Close Menu when clicked on a disabled item`,
       default: 'false'
     },
-  ];
+  */];
 
   constructor() {
   }
