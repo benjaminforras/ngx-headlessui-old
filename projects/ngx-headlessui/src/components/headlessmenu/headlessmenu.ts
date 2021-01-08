@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Directive, ElementRef, forwardRef, HostListener, Inject, Input, OnDestroy, OnInit, Optional, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, Directive, ElementRef, EventEmitter, forwardRef, HostListener, Inject, Input, OnDestroy, OnInit, Optional, Output, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
 import { BehaviorSubject, fromEvent } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { calculateActiveIndex, Focus } from '../../utils/calculate-active-index';
@@ -17,24 +17,31 @@ function nextFrame(cb: () => void) {
 
 type MenuItemDataRef = { textValue: string; disabled: boolean };
 
-@Directive({
-  selector: '[MenuItem]',
+@Component({
+  selector: '[MenuItem], [HeadlessMenuItem]',
   host: {
     '[attr.id]': 'id',
     '[attr.role]': '"menuitem"',
     '[attr.tabIndex]': '"-1"',
-    '[attr.aria-disabled]': 'disabled === true ? true : undefined'
-  }
+    '[attr.aria-disabled]': '_disabled === true ? true : undefined'
+  },
+  template: `
+    <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{$implicit: dataRef, 'active': active}"></ng-template>
+    <ng-content></ng-content>
+  `
 })
 export class MenuItemDirective implements AfterViewInit, OnDestroy {
+
+  @ContentChild(TemplateRef)
+  template!: TemplateRef<any>;
+
   @Input()
   set disabled(value: boolean | string | undefined) {
-    if(value || value === '') {
+    if (value || value === '') {
       this._disabled = true;
     } else {
       this._disabled = false;
     }
-    console.log(this._disabled);
   }
   _disabled!: boolean;
 
@@ -88,7 +95,7 @@ export class MenuItemDirective implements AfterViewInit, OnDestroy {
 }
 
 @Directive({
-  selector: '[MenuItems]',
+  selector: '[MenuItems], [HeadlessMenuItems]',
 })
 export class MenuItemsDirective implements OnInit, AfterViewInit {
   static: boolean = false;
@@ -215,7 +222,7 @@ export class MenuItemsDirective implements OnInit, AfterViewInit {
 
 
 @Directive({
-  selector: '[MenuButton]',
+  selector: '[MenuButton], [HeadlessMenuButton]',
   host: {
     '[attr.id]': 'id',
     '[attr.type]': '"button"',
@@ -284,7 +291,7 @@ export class MenuButtonDirective implements AfterViewInit {
 }
 
 @Component({
-  selector: '[Menu]',
+  selector: '[Menu], [HeadlessMenu]',
   template: `<ng-content></ng-content>`
 })
 export class MenuComponent {
@@ -296,6 +303,9 @@ export class MenuComponent {
   items: { id: string; dataRef: MenuItemDataRef }[] = [];
   searchQuery: string = '';
   activeItemIndex: number | null = null;
+
+  @Output()
+  activeItemChange: EventEmitter<{ activeIndex: number | null, id: string | null }> = new EventEmitter<{ activeIndex: number | null, id: string | null }>();
 
   constructor(public elementRef: ElementRef) { }
 
@@ -327,11 +337,18 @@ export class MenuComponent {
     this.searchQuery = '';
     this.activeItemIndex = nextActiveItemIndex;
 
-    // Force focus state
+    let elementId = null;
     if (this.activeItemIndex !== null) {
-      const { id } = this.items[this.activeItemIndex];
-      document.getElementById(id)?.focus();
+      elementId = this.items[this.activeItemIndex].id;
     }
+
+    this.activeItemChange.emit({ activeIndex: this.activeItemIndex, id: elementId });
+
+    // Force focus state
+    //if (this.activeItemIndex !== null) {
+    //  const { id } = this.items[this.activeItemIndex];
+    //  document.getElementById(id)?.focus();
+    //}
   }
 
   public search(value: string): void {
