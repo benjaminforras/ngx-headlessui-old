@@ -13,7 +13,7 @@ import {
 import { Reason, transition } from './utils/transitions';
 
 @Component({
-  selector: '[ngx-transition], ngx-transition',
+  selector: '[ngx-transition], transition, ngx-transition',
   templateUrl: './transition.component.html',
   styles: [],
 })
@@ -78,7 +78,7 @@ export class TransitionComponent implements OnChanges, AfterContentInit {
     if (this.closed) {
       this.closed = false;
       setTimeout(() => {
-        this.elementRef = this.transitionContainer.get(0).rootNodes[0];
+        this.elementRef = this.transitionContainer.get(0).rootNodes.find((element: HTMLElement) => element.tagName);
 
         setTimeout(() => {
           this.closed = true;
@@ -98,7 +98,7 @@ export class TransitionComponent implements OnChanges, AfterContentInit {
         if (!this.transitionContainer) {
           return;
         }
-        this.elementRef = this.transitionContainer.get(0).rootNodes[0];
+        this.elementRef = this.transitionContainer.get(0).rootNodes.find((element: HTMLElement) => element.tagName);
         this.beforeLeave.emit();
         this.transitionLeave(this.elementRef);
       }
