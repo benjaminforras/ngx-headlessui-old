@@ -1,14 +1,25 @@
 import { CommonModule } from '@angular/common';
+import { MenuButtonDirective } from './menu-button.directive';
 import { MenuComponent } from './menu.component';
+import { MenuItemComponent } from './menu-item.component';
+import { MenuItemsDirective } from './menu-items.directive';
 import { NgModule } from '@angular/core';
-import { TransitionModule } from './../transition/transition.module';
 
 @NgModule({
-  declarations: [MenuComponent],
-  imports: [
-    CommonModule,
-    TransitionModule
+  declarations: [
+    MenuComponent,
+    MenuItemsDirective,
+    MenuItemComponent,
+    MenuButtonDirective
   ],
-  exports: [MenuComponent]
+  imports: [
+    CommonModule
+  ],
+  exports: [
+    MenuComponent,
+    MenuItemsDirective,
+    MenuItemComponent,
+    MenuButtonDirective
+  ],
 })
 export class MenuModule { }

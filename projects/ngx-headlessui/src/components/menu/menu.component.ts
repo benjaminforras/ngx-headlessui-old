@@ -1,111 +1,110 @@
-import {
-  AfterViewInit,
-  Component,
-  ContentChild,
-  ElementRef,
-  HostListener,
-  Input,
-  TemplateRef,
-  ViewChild,
-  ViewContainerRef,
-  ViewEncapsulation
-} from '@angular/core';
+import { Component, ElementRef, HostListener, Input } from "@angular/core";
+import { Focus, calculateActiveIndex } from "../../utils/calculate-active-index";
 
-import { TransitionComponent } from '../transition/transition.component';
-import { fromEvent } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { BehaviorSubject } from "rxjs";
+import { MenuItemDataRef } from "./menu-item.data-ref";
+import { MenuStates } from "./menu-states.enum";
 
 @Component({
-  selector: '[ngx-menu], ngx-menu',
-  templateUrl: './menu.component.html',
-  encapsulation: ViewEncapsulation.None,
-  styles: [
-    `
-      :host {
-        all: unset;
-      }
-    `
-  ]
+  selector: '[Menu], [HeadlessMenu]',
+  template: `<ng-content></ng-content>`
 })
-export class MenuComponent implements AfterViewInit {
-  @Input()
-  opened: boolean = false;
-
-  closed: boolean = true;
-
-  @ViewChild('menuButtonTemplate', { read: TemplateRef })
-  menuButtonTemplate!: TemplateRef<any>;
-
-  @ViewChild('menuButtonContainer', { read: ViewContainerRef })
-  menuButtonContainer!: ViewContainerRef | any;
-
-  @ViewChild('menuItemsContainer', { read: ViewContainerRef })
-  menuItemsContainer!: ViewContainerRef | any;
+export class MenuComponent {
 
   @Input()
-  closeOnItemClick: boolean = true;
+  static: boolean = false;
 
-  @Input()
-  closeOnClickOutside: boolean = true;
+  menuState: BehaviorSubject<MenuStates> = new BehaviorSubject<MenuStates>(MenuStates.Closed);
 
-  @Input()
-  closeOnDisabled: boolean = false;
+  buttonRef: HTMLElement | null = null;
+  itemsRef: HTMLElement | null = null;
 
-  @ContentChild(TransitionComponent)
-  transitionComponent!: TransitionComponent;
+  items: { id: string; dataRef: MenuItemDataRef }[] = [];
+  searchQuery: string = '';
+  activeItemIndex: number | null = null;
 
-  constructor(private elementRef: ElementRef) {
+  constructor(public elementRef: ElementRef) { }
+
+  public closeMenu(): void {
+    this.menuState.next(MenuStates.Closed);
+    this.activeItemIndex = null;
   }
 
-  ngAfterViewInit(): void {
-    const view = this.menuButtonTemplate.createEmbeddedView(null);
-    this.menuButtonContainer.insert(view);
+  public openMenu(): void {
+    this.menuState.next(MenuStates.Open);
+  }
 
-    const button = this.menuButtonContainer.get(0)?.rootNodes[0];
-    fromEvent(button, 'click').subscribe(() => {
-      if (this.opened) {
-        this.closeMenu();
-        return;
+  public isOpened(): boolean {
+    return this.menuState && this.menuState.value === MenuStates.Open;
+  }
+
+  public goToItem(focus: Focus, id?: string): void {
+    const nextActiveItemIndex = calculateActiveIndex(
+      focus === Focus.Specific ? { focus: Focus.Specific, id: id! } : { focus: focus as Exclude<Focus, Focus.Specific> },
+      {
+        resolveItems: () => this.items,
+        resolveActiveIndex: () => this.activeItemIndex,
+        resolveId: item => item.id,
+        resolveDisabled: item => item.dataRef.disabled,
       }
+    )
 
-      this.openMenu();
-    });
-  }
+    if (this.searchQuery === '' && this.activeItemIndex === nextActiveItemIndex) return;
+    this.searchQuery = '';
+    this.activeItemIndex = nextActiveItemIndex;
 
-  @HostListener('document:pointerup', ['$event.target'])
-  public onClick(target: any): void {
-    const clickedInside = this.elementRef.nativeElement.contains(target);
-    if (!clickedInside && this.closeOnClickOutside) {
-      this.closeMenu();
+    let elementId = null;
+    if (this.activeItemIndex !== null) {
+      elementId = this.items[this.activeItemIndex].id;
     }
   }
 
-  private openMenu(): void {
-    this.opened = true;
-    this.closed = false;
+  public search(value: string): void {
+    this.searchQuery += value;
 
-    setTimeout(() => {
-      const elementRef = this.menuItemsContainer.get(0).rootNodes[0];
-      fromEvent(elementRef, 'click').pipe(take(1)).subscribe((event: any) => {
-        if (!this.closeOnDisabled && event.target && event.target.getAttribute('disabled') !== null) {
-          return;
-        }
+    const match = this.items.findIndex(
+      item => item.dataRef.textValue.startsWith(this.searchQuery) && !item.dataRef.disabled
+    );
 
-        if (this.closeOnItemClick) {
-          this.closeMenu();
-        }
-      });
-    });
+    if (match === -1 || match === this.activeItemIndex) return;
+
+    this.activeItemIndex = match;
   }
 
-  private closeMenu(): void {
-    this.opened = false;
-    if (this.transitionComponent) {
-      this.transitionComponent.afterLeave.subscribe(() => {
-        this.closed = true;
-      });
-    } else {
-      this.closed = true;
-    }
+  public clearSearch(): void {
+    this.searchQuery = '';
+  }
+
+  public registerItem(id: string, dataRef: MenuItemDataRef): void {
+    this.items.push({ id, dataRef });
+  }
+
+  public unregisterItem(id: string): void {
+    const nextItems = this.items.slice();
+    const currentActiveItem = this.activeItemIndex !== null ? nextItems[this.activeItemIndex] : null;
+    const idx = nextItems.findIndex(a => a.id === id);
+    if (idx !== -1) nextItems.splice(idx, 1);
+    this.items = nextItems;
+    this.activeItemIndex = (() => {
+      if (idx === this.activeItemIndex) return null;
+      if (currentActiveItem === null) return null;
+
+      // If we removed the item before the actual active index, then it would be out of sync. To
+      // fix this, we will find the correct (new) index position.
+      return nextItems.indexOf(currentActiveItem);
+    })();
+  }
+
+  @HostListener('window:click', ['$event'])
+  handler(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const active = document.activeElement;
+
+    if (this.menuState.value !== MenuStates.Open) return;
+    if (this.buttonRef?.contains(target)) return;
+
+    if (!this.elementRef.nativeElement?.contains(target)) this.closeMenu();
+    if (active !== document.body && active?.contains(target)) return; // Keep focus on newly clicked/focused element
+    if (!event.defaultPrevented) this.buttonRef?.focus({ preventScroll: true });
   }
 }
