@@ -13,7 +13,7 @@ import { MenuComponent } from "./menu.component";
     '[attr.aria-disabled]': '_disabled === true ? true : undefined'
   },
   template: `
-    <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{$implicit: dataRef, 'active': active}"></ng-template>
+    <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{$implicit: dataRef, 'active': active, 'disabled': _disabled}"></ng-template>
     <ng-content></ng-content>
   `
 })
