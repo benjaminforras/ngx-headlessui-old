@@ -1,37 +1,33 @@
 import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SwitchModule, TransitionModule } from 'projects/ngx-headlessui/src/public-api';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { HeadlessMenuModule } from 'projects/ngx-headlessui/src/components/headlessmenu/headlessmenu.module';
 import { IndexComponent } from './pages/index/index.component';
+import { MarkdownModule } from 'ngx-markdown';
 import { NgModule } from '@angular/core';
-import { NgxMenuPageComponent } from './pages/ngx-menu-page/ngx-menu-page.component';
-import { NgxTransitionPageComponent } from './pages/ngx-transition-page/ngx-transition-page.component';
-import { PreviewComponent } from './components/preview/preview.component';
 import { TestComponent } from './pages/test/test.component';
-import { TransitionModule } from 'projects/ngx-headlessui/src/components/transition/transition.module';
-import { ChangelogPageComponent } from './pages/changelog-page/changelog-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PreviewComponent,
-    NgxMenuPageComponent,
-    NgxTransitionPageComponent,
     IndexComponent,
     TestComponent,
-    ChangelogPageComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
+
     HighlightModule,
+    MarkdownModule.forRoot({ loader: HttpClient }),
 
     TransitionModule,
-    HeadlessMenuModule
+    SwitchModule
   ],
   providers: [
     {

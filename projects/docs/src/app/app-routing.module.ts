@@ -1,24 +1,17 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { ChangelogPageComponent } from './pages/changelog-page/changelog-page.component';
 import { IndexComponent } from './pages/index/index.component';
 import { NgModule } from '@angular/core';
-import { NgxMenuPageComponent } from './pages/ngx-menu-page/ngx-menu-page.component';
-import { NgxTransitionPageComponent } from './pages/ngx-transition-page/ngx-transition-page.component';
 import { TestComponent } from './pages/test/test.component';
 
 const routes: Routes = [
   {
-    path: 'menu',
-    component: NgxMenuPageComponent
+    path: 'docs',
+    loadChildren: () => import('./pages/docs/docs.module').then((m) => m.DocsModule)
   },
   {
-    path: 'transition',
-    component: NgxTransitionPageComponent
-  },
-  {
-    path: 'changelog',
-    component: ChangelogPageComponent
+    path: 'test',
+    component: TestComponent
   },
   {
     path: '',
@@ -31,15 +24,8 @@ const routes: Routes = [
   }
 ];
 
-const testRoutes: Routes = [
-  {
-    path: 'test',
-    component: TestComponent
-  }
-];
-
 @NgModule({
-  imports: [RouterModule.forRoot([...routes, ...testRoutes], { scrollPositionRestoration: 'enabled' })],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

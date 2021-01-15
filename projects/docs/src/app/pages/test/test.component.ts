@@ -16,7 +16,16 @@ export class TestComponent implements OnInit {
   selectedPerson: any;
   selectedPerson2: any;
 
+  activeItem: any;
+  toggle: boolean = false;
+  mobileOpen: boolean = false;
+  switchValue: boolean = false;
+
   constructor() { }
+
+  onChange(value: boolean) {
+    this.switchValue = value;
+  }
 
   ngOnInit(): void {
   }

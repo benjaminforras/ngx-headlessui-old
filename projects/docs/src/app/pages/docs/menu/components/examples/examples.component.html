@@ -1,0 +1,29 @@
+<div class="flex items-center justify-between">
+  <h1 class="sm:text-2xl lg:text-3xl mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900">Menu</h1>
+  <a routerLink="/docs/menu" class="flex items-center font-medium text-gray-900 underline">
+    Documentation
+  </a>
+</div>
+<div class="space-y-8">
+  <div>
+    <app-preview [code]="simpleMenu" title="Simple Menu with no styling">
+      <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px">
+        <app-simple-menu></app-simple-menu>
+      </div>
+    </app-preview>
+  </div>
+  <div>
+    <app-preview [code]="tailwindMenu" title="Simple Menu styled with TailwindCSS">
+      <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px">
+        <app-tailwind-menu></app-tailwind-menu>
+      </div>
+    </app-preview>
+  </div>
+  <div>
+    <app-preview [code]="tailwindMenuTransitionNgTemplate" title="Menu with Transition and TailwindCSS and ng-template">
+      <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px">
+        <app-tailwind-menu-transition-ng-template></app-tailwind-menu-transition-ng-template>
+      </div>
+    </app-preview>
+  </div>
+</div>

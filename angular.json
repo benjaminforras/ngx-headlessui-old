@@ -71,7 +71,9 @@
               "projects/docs/src/styles.scss",
               "node_modules/highlight.js/styles/vs2015.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/marked/lib/marked.js"
+            ],
             "customWebpackConfig": {
               "path": "webpack.config.js"
             },
@@ -141,7 +143,9 @@
               "projects/docs/src/styles.scss",
               "node_modules/highlight.js/styles/vs2015.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/marked/lib/marked.js"
+            ],
             "customWebpackConfig": {
               "path": "webpack.config.js"
             }

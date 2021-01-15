@@ -1,0 +1,72 @@
+<div Menu #menu [static]="true" class="relative inline-block text-left">
+  <div>
+    <button MenuButton type="button" class="hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm">
+      Options
+      <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </button>
+  </div>
+  <transition [show]="menu.isOpened()" enter="transition duration-100 ease-out" enterFrom="transform scale-95 opacity-0" enterTo="transform scale-100 opacity-100" leave="transition duration-75 ease-out" leaveFrom="transform scale-100 opacity-100" leaveTo="transform scale-95 opacity-0">
+    <ul *MenuItems class="ring-1 ring-black ring-opacity-5 absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+      <div class="py-1">
+        <li MenuItem>
+          <ng-template let-active="active">
+            <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
+              Edit
+            </a>
+          </ng-template>
+        </li>
+        <li MenuItem>
+          <ng-template let-active="active">
+            <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
+              Duplicate
+            </a>
+          </ng-template>
+        </li>
+      </div>
+      <div class="py-1">
+        <li MenuItem>
+          <ng-template let-active="active">
+            <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
+              Archive
+            </a>
+          </ng-template>
+        </li>
+        <li MenuItem>
+          <ng-template let-active="active">
+            <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
+              Move
+            </a>
+          </ng-template>
+        </li>
+
+      </div>
+      <div class="py-1">
+        <li MenuItem>
+          <ng-template let-active="active">
+            <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
+              Share
+            </a>
+          </ng-template>
+        </li>
+        <li MenuItem>
+          <ng-template let-active="active">
+            <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
+              Add to favorites
+            </a>
+          </ng-template>
+        </li>
+      </div>
+      <div class="py-1">
+        <li MenuItem>
+          <ng-template let-active="active">
+            <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
+              Delete
+            </a>
+          </ng-template>
+        </li>
+      </div>
+    </ul>
+  </transition>
+</div>

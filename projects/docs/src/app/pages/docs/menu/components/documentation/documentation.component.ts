@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './changelog-page.component.html',
+  templateUrl: './documentation.component.html',
   styles: [
   ]
 })
-export class ChangelogPageComponent implements OnInit {
+export class DocumentationComponent implements OnInit {
 
   constructor() { }
 

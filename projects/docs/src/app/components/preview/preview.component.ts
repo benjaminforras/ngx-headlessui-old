@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CopyService } from './../../services/copy.service';
 
+import { CopyService } from './../../services/copy.service';
 
 @Component({
   selector: 'app-preview',

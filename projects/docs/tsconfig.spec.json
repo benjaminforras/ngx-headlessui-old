@@ -6,11 +6,15 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/typings.d.ts"
+    ],
   },
   "files": [
     "src/test.ts",
-    "src/polyfills.ts"
+    "src/polyfills.ts",
   ],
   "include": [
     "src/**/*.spec.ts",

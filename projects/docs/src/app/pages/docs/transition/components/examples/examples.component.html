@@ -1,0 +1,22 @@
+<div class="flex items-center justify-between">
+  <h1 class="sm:text-2xl lg:text-3xl mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900">Transition</h1>
+  <a routerLink="/docs/transition" class="flex items-center font-medium text-gray-900 underline">
+    Documentation
+  </a>
+</div>
+<div class="space-y-8">
+  <div>
+    <app-preview [code]="simpleTransition" title="Simple transition with no styling">
+      <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px">
+        <app-simple-transition></app-simple-transition>
+      </div>
+    </app-preview>
+  </div>
+  <div>
+    <app-preview [code]="menuTransition" title="Simple Transition for a Menu">
+      <div class="flex justify-center w-full p-8" preview style="overflow: auto; min-height: 380px">
+        <app-menu-transition></app-menu-transition>
+      </div>
+    </app-preview>
+  </div>
+</div>

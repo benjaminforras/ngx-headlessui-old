@@ -1,0 +1,11 @@
+<button type="button" (click)="show = !show">Trigger</button>
+<transition
+    [show]="show"
+    enter="transition-opacity duration-75"
+    enterFrom="opacity-0"
+    enterTo="opacity-100"
+    leave="transition-opacity duration-150"
+    leaveFrom="opacity-100"
+    leaveTo="opacity-0">
+    <div>I will fade in and out</div>
+</transition>
