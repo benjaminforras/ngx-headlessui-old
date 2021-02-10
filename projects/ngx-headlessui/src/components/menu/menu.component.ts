@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, ViewEncapsulation } from "@angular/core";
 import { Focus, calculateActiveIndex } from "../../utils/calculate-active-index";
 
 import { BehaviorSubject } from "rxjs";
@@ -7,7 +7,9 @@ import { MenuStates } from "./menu-states.enum";
 
 @Component({
   selector: '[Menu], [HeadlessMenu]',
-  template: `<ng-content></ng-content>`
+  template: `<ng-content></ng-content>`,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuComponent {
 
@@ -23,15 +25,17 @@ export class MenuComponent {
   searchQuery: string = '';
   activeItemIndex: number | null = null;
 
-  constructor(public elementRef: ElementRef) { }
+  constructor(public elementRef: ElementRef, private changeDetector: ChangeDetectorRef) { }
 
   public closeMenu(): void {
     this.menuState.next(MenuStates.Closed);
     this.activeItemIndex = null;
+    this.changeDetector.detectChanges();
   }
 
   public openMenu(): void {
     this.menuState.next(MenuStates.Open);
+    this.changeDetector.detectChanges();
   }
 
   public isOpened(): boolean {
@@ -57,6 +61,7 @@ export class MenuComponent {
     if (this.activeItemIndex !== null) {
       elementId = this.items[this.activeItemIndex].id;
     }
+    this.changeDetector.detectChanges();
   }
 
   public search(value: string): void {
@@ -77,6 +82,7 @@ export class MenuComponent {
 
   public registerItem(id: string, dataRef: MenuItemDataRef): void {
     this.items.push({ id, dataRef });
+    this.changeDetector.markForCheck();
   }
 
   public unregisterItem(id: string): void {
@@ -93,6 +99,7 @@ export class MenuComponent {
       // fix this, we will find the correct (new) index position.
       return nextItems.indexOf(currentActiveItem);
     })();
+    this.changeDetector.markForCheck();
   }
 
   @HostListener('window:click', ['$event'])

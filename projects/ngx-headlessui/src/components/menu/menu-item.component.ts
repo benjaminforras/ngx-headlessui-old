@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ContentChild, ElementRef, forwardRef, HostListener, Inject, Input, OnDestroy, TemplateRef } from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChild, ElementRef, forwardRef, HostListener, Inject, Input, OnDestroy, TemplateRef, ViewEncapsulation } from "@angular/core";
 import { Focus } from "../../utils/calculate-active-index";
 import { useId } from "../../utils/use-id";
 import { MenuItemDataRef } from "./menu-item.data-ref";
@@ -15,7 +15,9 @@ import { MenuComponent } from "./menu.component";
   template: `
     <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{$implicit: dataRef, 'active': active, 'disabled': _disabled}"></ng-template>
     <ng-content></ng-content>
-  `
+  `,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuItemComponent implements AfterViewInit, OnDestroy {
 

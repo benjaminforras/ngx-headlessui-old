@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, EventEmitter, forwardRef, HostListener, Inject, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, HostListener, Inject, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Keys } from '../../utils/keyboard';
 import { useId } from '../../utils/use-id';
@@ -22,7 +22,9 @@ import { SwitchGroupDirective } from './switch-group.directive';
       useExisting: forwardRef(() => SwitchComponent),
       multi: true
     }
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SwitchComponent implements ControlValueAccessor {
 
@@ -37,13 +39,14 @@ export class SwitchComponent implements ControlValueAccessor {
 
   propagateChange = (_: any) => { };
 
-  constructor(@Inject(forwardRef(() => SwitchGroupDirective)) public switchGroup: any, elementRef: ElementRef) {
+  constructor(@Inject(forwardRef(() => SwitchGroupDirective)) public switchGroup: any, elementRef: ElementRef, private changeDetection: ChangeDetectorRef) {
     this.switchGroup.dataRef.switchRef = elementRef.nativeElement;
   }
 
   toggle(): void {
     this.value = !this.value;
     this.change.emit(this.value);
+    this.changeDetection.detectChanges();
   }
 
   @HostListener('click', ['$event'])
