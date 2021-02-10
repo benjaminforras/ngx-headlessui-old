@@ -31,4 +31,4 @@ Clicking the label will toggle the switch state, like you'd expect from a native
 ```
 
 ## Examples
-- [Basic example](/docs/menu/examples)
+- [Basic example](/docs/switch/examples)
