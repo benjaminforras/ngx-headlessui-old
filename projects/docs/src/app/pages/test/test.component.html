@@ -289,9 +289,13 @@
     <main class="relative z-0 flex-1 p-8 overflow-y-auto">
       <div class="h-96 border-4 border-gray-200 border-dashed rounded-lg">
         <button type="button" (click)="toggle = !toggle">Toggle</button>
-        <div switch-group class="flex items-center space-x-4">
-          <label switch-label>Enable notifications</label>
-          <button switch (change)="onChange($event)" class="w-11 focus:outline-none focus:shadow-outline relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer" [ngClass]="{'bg-indigo-600': switchValue, 'bg-gray-200': !switchValue}">
+
+        <div SwitchGroup class="flex items-center space-x-4">
+          <span class="flex flex-col">
+            <label SwitchLabel class="text-sm font-medium leading-5 text-gray-900">Enable notifications</label>
+            <span SwitchDescription class="text-sm leading-normal text-gray-500">Nulla amet tempus sit accumsan. Aliquet turpis sed sit lacinia.</span>
+          </span>
+          <button Switch (change)="onChange($event)" class="w-11 focus:outline-none focus:shadow-outline relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer" [ngClass]="{'bg-indigo-600': switchValue, 'bg-gray-200': !switchValue}">
             <span class="inline-block w-5 h-5 transition duration-200 ease-in-out transform bg-white rounded-full" [ngClass]="{ 'translate-x-5': switchValue, 'translate-x-0': !switchValue }"></span>
           </button>
         </div>

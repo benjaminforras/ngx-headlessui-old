@@ -6,7 +6,7 @@ import { SwitchGroupDirective } from './switch-group.directive';
 
 
 @Component({
-  selector: 'ngx-switch, switch, [switch]',
+  selector: 'ngx-switch, switch, [Switch]',
   templateUrl: './switch.component.html',
   host: {
     '[attr.id]': 'id',
@@ -14,6 +14,7 @@ import { SwitchGroupDirective } from './switch-group.directive';
     '[attr.tabIndex]': '0',
     '[attr.aria-checked]': 'value',
     '[attr.aria-labelledby]': 'switchGroup.dataRef.labelRef?.id',
+    '[attr.aria-describedby]': 'switchGroup.dataRef.descriptionRef?.id',
   },
   providers: [
     {
