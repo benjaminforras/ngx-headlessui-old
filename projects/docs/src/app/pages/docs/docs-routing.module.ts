@@ -15,6 +15,11 @@ const routes: Routes = [
     component: DocsLayoutComponent
   },
   {
+    path: 'switch',
+    loadChildren: () => import('./switch/switch.module').then(m => m.DocsSwitchModule),
+    component: DocsLayoutComponent
+  },
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: '/docs/menu'
