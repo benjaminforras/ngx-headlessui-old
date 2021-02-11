@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, HostListener, Inject, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, HostListener, Inject, Optional, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Keys } from '../../utils/keyboard';
 import { useId } from '../../utils/use-id';
@@ -13,8 +13,8 @@ import { SwitchGroupDirective } from './switch-group.directive';
     '[attr.role]': '"switch"',
     '[attr.tabIndex]': '0',
     '[attr.aria-checked]': 'value',
-    '[attr.aria-labelledby]': 'switchGroup.dataRef.labelRef?.id',
-    '[attr.aria-describedby]': 'switchGroup.dataRef.descriptionRef?.id',
+    '[attr.aria-labelledby]': 'switchGroup ? switchGroup.dataRef.labelRef?.id : undefined',
+    '[attr.aria-describedby]': 'switchGroup ? switchGroup.dataRef.descriptionRef?.id : undefined',
   },
   providers: [
     {
@@ -39,8 +39,10 @@ export class SwitchComponent implements ControlValueAccessor {
 
   propagateChange = (_: any) => { };
 
-  constructor(@Inject(forwardRef(() => SwitchGroupDirective)) public switchGroup: any, elementRef: ElementRef, private changeDetection: ChangeDetectorRef) {
-    this.switchGroup.dataRef.switchRef = elementRef.nativeElement;
+  constructor(@Optional() @Inject(forwardRef(() => SwitchGroupDirective)) public switchGroup: any, elementRef: ElementRef, private changeDetection: ChangeDetectorRef) {
+    if(this.switchGroup) {
+      this.switchGroup.dataRef.switchRef = elementRef.nativeElement;
+    }
   }
 
   toggle(): void {
