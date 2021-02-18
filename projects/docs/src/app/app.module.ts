@@ -7,8 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { IndexComponent } from './pages/index/index.component';
+import { ListboxModule } from './../../../ngx-headlessui/src/components/listbox/listbox.module';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TestComponent } from './pages/test/test.component';
 
 @NgModule({
@@ -23,11 +25,14 @@ import { TestComponent } from './pages/test/test.component';
     HttpClientModule,
     AppRoutingModule,
 
+    ReactiveFormsModule,
+
     HighlightModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
 
     TransitionModule,
-    SwitchModule
+    SwitchModule,
+    ListboxModule
   ],
   providers: [
     {

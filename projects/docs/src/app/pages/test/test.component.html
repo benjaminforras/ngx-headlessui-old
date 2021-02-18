@@ -1,307 +1,175 @@
-<!--
-  <div class="flex flex-col items-center justify-center p-12 space-y-10">
-  <div switch-group (change)="onChange($event)" class="flex items-center space-x-4">
-    <label switch-label>Enable notifications</label>
-    <button switch class="w-11 focus:outline-none focus:shadow-outline relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer" [ngClass]="{'bg-indigo-600': switchValue, 'bg-gray-200': !switchValue}">
-      <ng-template let-checked="checked">
-        <span class="inline-block w-5 h-5 transition duration-200 ease-in-out transform bg-white rounded-full" [ngClass]="{ 'translate-x-5': checked, 'translate-x-0': !checked }"></span>
-      </ng-template>
-    </button>
-  </div>
+<div class="container py-12">
 
-  <button type="button" (click)="toggle = !toggle">Toggle</button>
-  <transition [show]="toggle" enter="transition duration-100 ease-out" enterFrom="transform scale-95 opacity-0" enterTo="transform scale-100 opacity-100" leave="transition duration-75 ease-out" leaveFrom="transform scale-100 opacity-100" leaveTo="transform scale-95 opacity-0">
-    <div>
-      Transition
-      <transition enter="transition duration-100 ease-out" enterFrom="transform scale-95 opacity-0" enterTo="transform scale-100 opacity-100" leave="transition duration-75 ease-out" leaveFrom="transform scale-100 opacity-100" leaveTo="transform scale-95 opacity-0">
-        <div>Hi</div>
-      </transition>
-    </div>
-  </transition>
-
-  <div Menu #menu [static]="true" class="relative inline-block text-left">
-    <div>
-      <button MenuButton type="button" class="hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm">
-        Options
-        <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
-      </button>
-    </div>
-    <transition [show]="menu.isOpened()" enter="transition duration-100 ease-out" enterFrom="transform scale-95 opacity-0" enterTo="transform scale-100 opacity-100" leave="transition duration-75 ease-out" leaveFrom="transform scale-100 opacity-100" leaveTo="transform scale-95 opacity-0">
-      <ul *MenuItems class="ring-1 ring-black ring-opacity-5 absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-        <div class="py-1">
-          <li MenuItem>
-            <ng-template let-active="active">
-              <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
-                Edit
-              </a>
-            </ng-template>
-          </li>
-          <li MenuItem>
-            <ng-template let-active="active">
-              <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
-                Duplicate
-              </a>
-            </ng-template>
-          </li>
+  <div>
+    <div class="md:grid md:grid-cols-3 md:gap-6">
+      <div class="md:col-span-1">
+        <div class="sm:px-0 px-4">
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Select</h3>
+          <p class="mt-1 text-sm text-gray-600">
+            This information will be displayed publicly so be careful what you share.
+          </p>
         </div>
-        <div class="py-1">
-          <li MenuItem>
-            <ng-template let-active="active">
-              <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
-                Archive
-              </a>
-            </ng-template>
-          </li>
-          <li MenuItem>
-            <ng-template let-active="active">
-              <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
-                Move
-              </a>
-            </ng-template>
-          </li>
+      </div>
+      <div class="md:mt-0 md:col-span-2 mt-5">
+        <form action="#" method="POST">
+          <div class="sm:rounded-md shadow">
+            <div class="sm:p-6 px-4 py-5 space-y-6 bg-white">
+              <div class="grid grid-cols-3 gap-6">
+                <div class="sm:col-span-2 col-span-3">
+                  <div Listbox [(value)]="selectedPerson" [formControl]="selectFormControl">
+                    <label ListboxLabel class="block text-sm font-medium text-gray-700">
+                      Assigned to
+                    </label>
+                    <div class="relative mt-1">
+                      <button ListboxButton type="button" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" class="focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default">
+                        <span class="flex items-center">
+                          <img *ngIf="selectedPerson" [src]="selectedPerson.image" alt="" class="flex-shrink-0 w-6 h-6 rounded-full">
+                          <span class="block ml-3 truncate">
+                            {{ selectedPerson ? selectedPerson.name : 'Nincs kiválasztva' }}
+                          </span>
+                        </span>
+                        <span class="absolute inset-y-0 right-0 flex items-center pr-2 ml-3 pointer-events-none">
+                          <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                          </svg>
+                        </span>
+                      </button>
 
-        </div>
-        <div class="py-1">
-          <li MenuItem>
-            <ng-template let-active="active">
-              <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
-                Share
-              </a>
-            </ng-template>
-          </li>
-          <li MenuItem>
-            <ng-template let-active="active">
-              <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
-                Add to favorites
-              </a>
-            </ng-template>
-          </li>
-        </div>
-        <div class="py-1">
-          <li MenuItem>
-            <ng-template let-active="active">
-              <a href="#" [class.bg-gray-100]="active" class="hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm text-gray-700">
-                Delete
-              </a>
-            </ng-template>
-          </li>
-        </div>
-      </ul>
-    </transition>
-  </div>
-</div>
--->
+                      <div class="absolute w-full mt-1 bg-white rounded-md shadow-lg">
+                        <ul *ListboxOptions class="max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm py-1 overflow-auto text-base rounded-md">
+                          <ListboxOption *ngFor="let person of people" [value]="person" [disabled]="person.unavailable">
+                            <ng-template let-selected="selected" let-active="active">
+                              <li [ngClass]="{'text-white bg-indigo-600': active || selected, 'text-gray-900': !active && !selected, 'text-gray-700 opacity-50 cursor-not-allowed': person.unavailable, 'cursor-default': !person.unavailable}" class="pr-9 relative py-2 pl-3 select-none">
+                                <div class="flex items-center">
+                                  <img [src]="person.image" alt="" class="flex-shrink-0 w-6 h-6 rounded-full">
+                                  <span [ngClass]="{'font-semibold': selected, 'font-normal': !selected}" class="block ml-3 truncate">
+                                    {{ person.name }}
+                                  </span>
+                                </div>
 
-<transition [show]="toggle">
-  <div class="fixed inset-0 z-10 overflow-y-auto">
-    <div (click)="toggle = !toggle" class="sm:block sm:p-0 flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center">
-
-      <transition enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-        <div class="fixed inset-0 transition-opacity">
-          <div class="absolute inset-0 bg-gray-500 opacity-75" aria-hidden="true"></div>
-        </div>
-      </transition>
-
-
-      <span class="sm:inline-block sm:align-middle sm:h-screen hidden" aria-hidden="true">&#8203;</span>
-
-      <transition enter="ease-out duration-300" enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" enterTo="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 translate-y-0 sm:scale-100" leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-        <div class="sm:my-8 sm:align-middle sm:max-w-lg sm:w-full inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-          <div class="sm:p-6 sm:pb-4 px-4 pt-5 pb-4 bg-white">
-            <div class="sm:flex sm:items-start">
-              <div class="sm:mx-0 sm:h-10 sm:w-10 flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full">
-                <svg class="w-6 h-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-              </div>
-              <div class="sm:mt-0 sm:ml-4 sm:text-left mt-3 text-center">
-                <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-headline">
-                  Deactivate account
-                </h3>
-                <div class="mt-2">
-                  <p class="text-sm text-gray-500">
-                    Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.
-                  </p>
+                                <span *ngIf="selected" [ngClass]="{'text-white': active || selected, 'text-indigo-600': !active && !selected}" class="absolute inset-y-0 right-0 flex items-center pr-4">
+                                  <!-- Heroicon name: solid/check -->
+                                  <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                  </svg>
+                                </span>
+                              </li>
+                            </ng-template>
+                          </ListboxOption>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="bg-gray-50 sm:px-6 px-4 py-3 text-right">
+              <button (click)="change()" type="button" class="hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm">
+                Save
+              </button>
+            </div>
           </div>
-          <div class="bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse px-4 py-3">
-            <button type="button" class="hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm">
-              Deactivate
-            </button>
-            <button type="button" class="hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm">
-              Cancel
-            </button>
-          </div>
-        </div>
-      </transition>
-    </div>
-  </div>
-</transition>
-
-<div class="bg-gray-50 flex h-screen overflow-hidden">
-  <transition [show]="mobileOpen">
-    <div class="fixed inset-0 z-40 flex">
-      <!--
-      Background overlay, show/hide based on slide-over state.
-
-      Entering: "ease-in-out duration-500"
-        From: "opacity-0"
-        To: "opacity-100"
-      Leaving: "ease-in-out duration-500"
-        From: "opacity-100"
-        To: "opacity-0"
-    -->
-      <transition enter="ease-in-out duration-500" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in-out duration-500" leaveFrom="opacity-100" leaveTo="opacity-0">
-        <div class="fixed inset-0">
-          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-        </div>
-      </transition>
-
-      <!--
-        Entering: "transform transition ease-in-out duration-500 sm:duration-700"
-          From: "translate-x-full"
-          To: "translate-x-0"
-        Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
-          From: "translate-x-0"
-          To: "translate-x-full"
-      -->
-      <transition enter="transition ease-in-out duration-300 transform" enterFrom="-translate-x-full" enterTo="translate-x-0" leave="transition ease-in-out duration-300 transform" leaveFrom="translate-x-0" leaveTo="-translate-x-full" class="relative w-full h-full max-w-xs">
-        <div class="flex flex-col flex-1 h-full pt-5 pb-4 bg-indigo-500">
-          <!--
-          Close button, show/hide based on slide-over state.
-
-          Entering: "ease-in-out duration-500"
-            From: "opacity-0"
-            To: "opacity-100"
-          Leaving: "ease-in-out duration-500"
-            From: "opacity-100"
-            To: "opacity-0"
-        -->
-          <div class="-mr-14 absolute top-0 right-0 p-1">
-            <button (click)="mobileOpen = false" class="focus:outline-none focus:bg-cool-gray-600 flex items-center justify-center w-12 h-12 rounded-full">
-              <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-          <!-- Sidebar content -->
-          <!-- ./Sidebar content -->
-        </div>
-      </transition>
-      <div class="w-14 flex-shrink-0"></div>
-    </div>
-  </transition>
-
-  <!-- Sidebar -->
-  <div class="lg:flex lg:flex-shrink-0 hidden">
-    <div class="flex flex-col w-64">
-      <div class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto bg-indigo-500">
-        <!-- Sidebar content -->
-        <div class="flex items-center flex-shrink-0 h-12 px-4">
-          <img src="https://worknation.vercel.app/assets/images/logo/logo-light.png" alt="Worknation" class="w-auto h-8" />
-        </div>
-        <nav class="flex-1 px-2">
-          <a class="group hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out rounded-md" href="/dashboard">
-            <svg class="group-hover:text-gray-300 group-focus:text-gray-300 w-6 h-6 mr-3 text-gray-400 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-            </svg>
-            <span>Kezdőlap</span>
-          </a>
-          <a class="group hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out rounded-md" href="/dashboard/worktime">
-            <svg class="group-hover:text-gray-300 group-focus:text-gray-300 w-6 h-6 mr-3 text-gray-400 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span>Munkaidő</span>
-          </a>
-          <a class="group hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out rounded-md" href="/dashboard/stats">
-            <svg class="group-hover:text-gray-300 group-focus:text-gray-300 w-6 h-6 mr-3 text-gray-400 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-            </svg>
-            <span>Kimutatások</span>
-          </a>
-        </nav>
-        <nav class="px-2 mt-auto">
-          <a class="group hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out rounded-md" href="/dashboard/settings">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="group-hover:text-gray-300 group-focus:text-gray-300 w-6 h-6 mr-3 text-gray-400 transition duration-150 ease-in-out">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            <span>Beállítások</span>
-          </a>
-          <a class="group hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out rounded-md" href="/">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="group-hover:text-gray-300 group-focus:text-gray-300 w-6 h-6 mr-3 text-gray-400 transition duration-150 ease-in-out">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-            </svg>
-            <span>Kijelentkezés</span>
-          </a>
-        </nav>
-        <!-- ./Sidebar content -->
+        </form>
       </div>
     </div>
   </div>
-  <!-- ./Sidebar -->
 
-  <!-- Content -->
-  <div class="focus:outline-none flex-1 overflow-auto" tabindex="0">
-    <div class="relative z-10 flex flex-shrink-0 h-16 bg-white border-b border-gray-200">
-      <button (click)="mobileOpen = !mobileOpen" class="border-cool-gray-200 text-cool-gray-400 focus:outline-none focus:bg-cool-gray-100 focus:text-cool-gray-600 lg:hidden px-4 border-r" aria-label="Open sidebar">
-        <svg class="w-6 h-6 transition duration-150 ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-        </svg>
-      </button>
-      <div class="sm:px-6 lg:px-8 flex items-center justify-between flex-1 px-4">
-        <div class="flex-1">
-          <button type="button" class="hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm">
-            <svg class="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-            </svg>
-            Publish
-          </button>
+  <div class="sm:block hidden" aria-hidden="true">
+    <div class="py-5">
+      <div class="border-t border-gray-200"></div>
+    </div>
+  </div>
+
+  <div class="sm:mt-0 mt-10">
+    <div class="md:grid md:grid-cols-3 md:gap-6">
+      <div class="md:col-span-1">
+        <div class="sm:px-0 px-4">
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Switch</h3>
+          <p class="mt-1 text-sm text-gray-600">
+            Decide which communications you'd like to receive and how.
+          </p>
         </div>
-        <div class="flex items-center px-5">
-          <div class="relative">
-            <button type="button" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-500 p-1 bg-white rounded-full">
-              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              </svg>
-            </button>
-            <span class="absolute top-0 right-0 flex w-2 h-2">
-              <span class="animate-ping absolute inline-flex w-full h-full bg-indigo-400 rounded-full opacity-75"></span>
-              <span class="relative inline-flex w-2 h-2 bg-indigo-500 rounded-full"></span>
-            </span>
+      </div>
+      <div class="md:mt-0 md:col-span-2 mt-5">
+        <form action="#" method="POST">
+          <div class="sm:rounded-md overflow-hidden shadow">
+            <div class="sm:p-6 px-4 py-5 space-y-6 bg-white">
+              <fieldset>
+                <legend class="text-base font-medium text-gray-900">By Email</legend>
+                <div class="mt-4 space-y-4">
+                  <div SwitchGroup class="flex items-center space-x-4">
+                    <span class="flex flex-col">
+                      <label SwitchLabel class="text-sm font-medium leading-5 text-gray-900">Enable notifications</label>
+                      <span SwitchDescription class="text-sm leading-normal text-gray-500">Nulla amet tempus sit accumsan. Aliquet turpis sed sit lacinia.</span>
+                    </span>
+                    <button Switch (change)="onChange($event)" class="w-11 focus:outline-none focus:shadow-outline relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer" [ngClass]="{'bg-indigo-600': switchValue, 'bg-gray-200': !switchValue}">
+                      <span class="inline-block w-5 h-5 transition duration-200 ease-in-out transform bg-white rounded-full" [ngClass]="{ 'translate-x-5': switchValue, 'translate-x-0': !switchValue }"></span>
+                    </button>
+                  </div>
+                  <div SwitchGroup class="flex items-center space-x-4">
+                    <span class="flex flex-col">
+                      <label SwitchLabel class="text-sm font-medium leading-5 text-gray-900">Enable notifications</label>
+                      <span SwitchDescription class="text-sm leading-normal text-gray-500">Nulla amet tempus sit accumsan. Aliquet turpis sed sit lacinia.</span>
+                    </span>
+                    <button Switch (change)="onChange($event)" class="w-11 focus:outline-none focus:shadow-outline relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer" [ngClass]="{'bg-indigo-600': switchValue, 'bg-gray-200': !switchValue}">
+                      <span class="inline-block w-5 h-5 transition duration-200 ease-in-out transform bg-white rounded-full" [ngClass]="{ 'translate-x-5': switchValue, 'translate-x-0': !switchValue }"></span>
+                    </button>
+                  </div>
+                  <div SwitchGroup class="flex items-center space-x-4">
+                    <span class="flex flex-col">
+                      <label SwitchLabel class="text-sm font-medium leading-5 text-gray-900">Enable notifications</label>
+                      <span SwitchDescription class="text-sm leading-normal text-gray-500">Nulla amet tempus sit accumsan. Aliquet turpis sed sit lacinia.</span>
+                    </span>
+                    <button Switch (change)="onChange($event)" class="w-11 focus:outline-none focus:shadow-outline relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer" [ngClass]="{'bg-indigo-600': switchValue, 'bg-gray-200': !switchValue}">
+                      <span class="inline-block w-5 h-5 transition duration-200 ease-in-out transform bg-white rounded-full" [ngClass]="{ 'translate-x-5': switchValue, 'translate-x-0': !switchValue }"></span>
+                    </button>
+                  </div>
+                  <div SwitchGroup class="flex items-center space-x-4">
+                    <span class="flex flex-col">
+                      <label SwitchLabel class="text-sm font-medium leading-5 text-gray-900">Enable notifications</label>
+                      <span SwitchDescription class="text-sm leading-normal text-gray-500">Nulla amet tempus sit accumsan. Aliquet turpis sed sit lacinia.</span>
+                    </span>
+                    <button Switch (change)="onChange($event)" class="w-11 focus:outline-none focus:shadow-outline relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer" [ngClass]="{'bg-indigo-600': switchValue, 'bg-gray-200': !switchValue}">
+                      <span class="inline-block w-5 h-5 transition duration-200 ease-in-out transform bg-white rounded-full" [ngClass]="{ 'translate-x-5': switchValue, 'translate-x-0': !switchValue }"></span>
+                    </button>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <div>
+                  <legend class="text-base font-medium text-gray-900">Push Notifications</legend>
+                  <p class="text-sm text-gray-500">These are delivered via SMS to your mobile phone.</p>
+                </div>
+                <div class="mt-4 space-y-4">
+                  <div class="flex items-center">
+                    <input id="push_everything" name="push_notifications" type="radio" class="focus:ring-indigo-500 w-4 h-4 text-indigo-600 border-gray-300">
+                    <label for="push_everything" class="block ml-3 text-sm font-medium text-gray-700">
+                      Everything
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="push_email" name="push_notifications" type="radio" class="focus:ring-indigo-500 w-4 h-4 text-indigo-600 border-gray-300">
+                    <label for="push_email" class="block ml-3 text-sm font-medium text-gray-700">
+                      Same as email
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="push_nothing" name="push_notifications" type="radio" class="focus:ring-indigo-500 w-4 h-4 text-indigo-600 border-gray-300">
+                    <label for="push_nothing" class="block ml-3 text-sm font-medium text-gray-700">
+                      No push notifications
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="bg-gray-50 sm:px-6 px-4 py-3 text-right">
+              <button type="submit" class="hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm">
+                Save
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="flex items-center px-4">
-          <button class="focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-500 focus:outline-none flex-shrink-0 bg-white rounded-full">
-            <img class="sm:h-10 sm:w-10 w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="" />
-          </button>
-          <div class="sm:ml-3 sm:block hidden">
-            <div class="text-sm font-medium leading-none text-gray-800">Tom Cook</div>
-            <div class="text-xs font-medium leading-none text-gray-600">tom@example.com</div>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
-    <main class="relative z-0 flex-1 p-8 overflow-y-auto">
-      <div class="h-96 border-4 border-gray-200 border-dashed rounded-lg">
-        <button type="button" (click)="toggle = !toggle">Toggle</button>
-
-        <div SwitchGroup class="flex items-center space-x-4">
-          <span class="flex flex-col">
-            <label SwitchLabel class="text-sm font-medium leading-5 text-gray-900">Enable notifications</label>
-            <span SwitchDescription class="text-sm leading-normal text-gray-500">Nulla amet tempus sit accumsan. Aliquet turpis sed sit lacinia.</span>
-          </span>
-          <button Switch (change)="onChange($event)" class="w-11 focus:outline-none focus:shadow-outline relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer" [ngClass]="{'bg-indigo-600': switchValue, 'bg-gray-200': !switchValue}">
-            <span class="inline-block w-5 h-5 transition duration-200 ease-in-out transform bg-white rounded-full" [ngClass]="{ 'translate-x-5': switchValue, 'translate-x-0': !switchValue }"></span>
-          </button>
-        </div>
-
-      </div>
-    </main>
   </div>
-  <!-- ./Content -->
 </div>
